@@ -28,7 +28,14 @@ Vagrant.configure("2") do |config|
     ansible.groups = {
       "master" => ["v-master"],
       "node" => ["v-node-1", "v-node-2"],
-      "k3s_cluster:children" => ["master", "node"]
+      "k3s_cluster:children" => ["master", "node"],
+      "k3s_cluster:vars" => {
+        "k3s_version" => "v1.17.4+k3s1",
+        "ansible_python_interpreter" => "auto_silent",
+        "systemd_dir" => "/etc/systemd/system",
+        "master_ip" => "192.168.50.11",
+        "extra_server_args" => ""
+      }
     }
   end
 end
