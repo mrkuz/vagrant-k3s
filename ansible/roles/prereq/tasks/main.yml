@@ -1,9 +1,4 @@
 ---
-- name: Set SELinux to disabled state
-  selinux:
-    state: disabled
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-
 - name: Enable IPv4 forwarding
   sysctl:
     name: net.ipv4.ip_forward
@@ -17,19 +12,3 @@
     value: "1"
     state: present
     reload: yes
-
-- name: Set bridge-nf-call-iptables (just to be sure)
-  sysctl:
-    name: net.bridge.bridge-nf-call-iptables
-    value: "1"
-    state: present
-    reload: yes
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-
-- name: Set bridge-nf-call-ip6tables (just to be sure)
-  sysctl:
-    name: net.bridge.bridge-nf-call-iptables
-    value: "1"
-    state: present
-    reload: yes
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
