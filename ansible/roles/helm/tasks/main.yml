@@ -1,0 +1,38 @@
+---
+- name: Delete existing binary
+  file:
+    path: /usr/local/bin/helm
+    state: absent
+
+- name: Create temporary directory
+  file:
+    path: /tmp/helm
+    state: directory
+    mode: '0755'
+
+- name: Download archive
+  get_url:
+    url: https://get.helm.sh/helm-{{ helm_version }}-linux-amd64.tar.gz
+    dest: /tmp/helm/helm.tar.gz
+
+- name: Extract archive
+  unarchive:
+    src: /tmp/helm/helm.tar.gz
+    dest: /tmp/helm
+    remote_src: yes
+
+- name: Copy binary
+  copy:
+    src: /tmp/helm/linux-amd64/helm
+    dest: /usr/local/bin/helm
+    remote_src: yes
+    owner: root
+    group: root
+    mode: 755
+
+- name: Delete temporary directory
+  tags:
+    - always
+  file:
+    path: /tmp/helm
+    state: absent

@@ -37,6 +37,9 @@ Vagrant.configure("2") do |config|
         "ansible_python_interpreter" => "auto_silent",
         "systemd_dir" => "/etc/systemd/system",
         "master_ip" => "192.168.50.11",
+      },
+      "master:vars" => {
+        "helm_version" => "v3.1.2"
       }
     }
   end
