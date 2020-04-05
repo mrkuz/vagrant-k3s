@@ -11,14 +11,17 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "v-master" do |v|
+    v.vm.hostname = "master"
     v.vm.network "private_network", ip: "192.168.50.11"
   end
 
   config.vm.define "v-node-1" do |v|
+    v.vm.hostname = "node-1"
     v.vm.network "private_network", ip: "192.168.50.21"
   end
 
   config.vm.define "v-node-2" do |v|
+    v.vm.hostname = "node-2"
     v.vm.network "private_network", ip: "192.168.50.22"
   end
 
