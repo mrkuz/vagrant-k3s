@@ -62,6 +62,13 @@
     --server=https://{{ master_ip }}:6443
     --kubeconfig ~{{ ansible_user }}/.kube/config
 
+- name: Copy config file to shared directory
+  copy:
+    src: ~{{ ansible_user }}/.kube/config
+    dest: /vagrant/kubeconfig
+    remote_src: yes
+    owner: "{{ ansible_user }}"
+
 - name: Change file access config
   file:
     path: /etc/rancher/k3s/k3s.yaml
